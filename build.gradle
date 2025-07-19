@@ -1,15 +1,23 @@
 plugins {
     id 'java'
     id 'application'
+    id 'org.javamodularity.moduleplugin' version '1.8.10'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 group = 'armmel.adb'
 version = '1.0'
 
-sourceCompatibility = '17'
-targetCompatibility = '17'
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
 
-mainClassName = 'armmel.adb.AdbCommander'
+application {
+    mainClass = 'armmel.adb.AdbCommander'
+    mainModule = 'armmel.adb'
+}
 
 repositories {
     mavenCentral()
@@ -17,4 +25,7 @@ repositories {
 
 dependencies {
     implementation 'com.googlecode.lanterna:lanterna:3.1.1'
+}
+
+modularity {
 }
